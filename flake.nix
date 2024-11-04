@@ -13,11 +13,11 @@
   }:
     flake-utils.lib.eachDefaultSystem (
       system: let
-        pkgs = nixpkgs.legacyPackages.${system};
+        pkgs_local = import nixpkgs { inherit system; };
       in {
-        formatter = pkgs.alejandra;
+        formatter = pkgs_local.alejandra;
 
-        lib = {
+        lib = {pkgs}: {
           rust = import ./lib/rust.nix {inherit pkgs;};
           editor = import ./lib/editor.nix {inherit pkgs;};
         };
