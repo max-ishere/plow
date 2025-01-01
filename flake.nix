@@ -30,9 +30,9 @@
           editor = import ./lib/editor.nix {inherit pkgs;};
         };
 
-        devShells.rust = with self.lib;
+        devShells.rust = with self.lib.${system};
           editor.vscode {
-            extensions = editor.vscode-extensions.vim ++ rust.vscode-extensions;
+            extensions = editor.vscode-extensions.vim ++ rust.vscode-extensions ++ nix.vscode-extensions;
           };
       }
     );
